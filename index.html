@@ -69,6 +69,11 @@
             overflow: hidden
         }
 
+        body.low-motion::before,
+        body.low-motion::after {
+            animation: none !important;
+        }
+
         img {
             max-width: 100%;
             display: block
@@ -84,12 +89,12 @@
             z-index: 999;
             flex-direction: column;
             gap: 14px;
-            transition: opacity .35s ease, visibility .35s ease;
+            transition: opacity .25s ease, visibility .25s ease;
         }
 
         .preloader.hidden {
             opacity: 0;
-            visibility: hidden
+            visibility: hidden;
         }
 
         .loader-bubble {
@@ -466,7 +471,9 @@
         .reveal {
             opacity: 0;
             transform: translateY(28px);
-            transition: opacity .8s ease, transform .8s ease;
+            transition: opacity .55s ease, transform .55s ease;
+            content-visibility: auto;
+            contain-intrinsic-size: 1px 420px;
         }
 
         .reveal.visible {
@@ -481,6 +488,8 @@
 
         .testimonials {
             margin-top: 26px;
+            content-visibility: auto;
+            contain-intrinsic-size: 1px 280px;
         }
 
         .testimonial-slider {
@@ -488,11 +497,13 @@
             overflow: hidden;
             border-radius: 18px;
             touch-action: pan-y;
+            content-visibility: auto;
+            contain-intrinsic-size: 1px 180px;
         }
 
         .testimonial-track {
             display: flex;
-            transition: transform .55s ease;
+            transition: transform .45s ease;
             will-change: transform;
         }
 
@@ -668,6 +679,7 @@
             text-decoration: none;
             box-shadow: 0 14px 30px rgba(255, 75, 158, 0.22);
             animation: floaty 2.8s ease-in-out infinite;
+            will-change: transform;
         }
 
         .sticky-cta {
@@ -890,6 +902,21 @@
                 margin: 0;
                 border-radius: 14px;
             }
+
+            body.low-motion .hero::before,
+            body.low-motion .promo-card::before,
+            body.low-motion .shine-card::before,
+            body.low-motion .btn::after {
+                display: none;
+            }
+
+            body.low-motion .floating-wa {
+                animation: none;
+            }
+
+            body.low-motion .btn-primary {
+                animation: none;
+            }
         }
 
         @media (max-width:420px) {
@@ -965,10 +992,10 @@
                         <span style="font-size:13px;color:#9b9b9b">4 foto</span>
                     </div>
                     <div id="galeri" class="gallery-grid">
-                        <img src="images/Dimsum Mentai 1.jpg" alt="Dimsum Mentai 1">
-                        <img src="images/Dimsum Mentai 2.jpg" alt="Dimsum Mentai 2">
-                        <img src="images/Dimsum Mentai 3.jpg" alt="Dimsum Mentai 3">
-                        <img src="images/Dimsum Mentai 4.jpg" alt="Dimsum Mentai 4">
+                        <img src="images/Dimsum Mentai 1.jpg" alt="Dimsum Mentai 1" loading="lazy" decoding="async">
+                        <img src="images/Dimsum Mentai 2.jpg" alt="Dimsum Mentai 2" loading="lazy" decoding="async">
+                        <img src="images/Dimsum Mentai 3.jpg" alt="Dimsum Mentai 3" loading="lazy" decoding="async">
+                        <img src="images/Dimsum Mentai 4.jpg" alt="Dimsum Mentai 4" loading="lazy" decoding="async">
                     </div>
                 </div>
             </aside>
@@ -1090,11 +1117,14 @@
     </div>
 
     <script>
+        const isLowPowerMobile = window.matchMedia('(max-width: 768px)').matches || window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        if (isLowPowerMobile) document.body.classList.add('low-motion');
+
         window.addEventListener('load', () => {
             setTimeout(() => {
                 document.getElementById('preloader').classList.add('hidden');
                 document.body.classList.remove('loading');
-            }, 900);
+            }, 700);
         });
 
         document.getElementById('year').textContent = new Date().getFullYear();
@@ -1151,22 +1181,23 @@
 
         function confettiBurst(x, y) {
             const colors = ['#ff4b9e', '#ff7fbf', '#ffd6e9', '#ffffff'];
-            for (let i = 0; i < 28; i++) {
+            const total = window.matchMedia('(max-width: 768px)').matches ? 8 : 28;
+            for (let i = 0; i < total; i++) {
                 const el = document.createElement('div');
                 el.className = 'confetti';
                 el.style.left = x + 'px';
                 el.style.top = y + 'px';
                 el.style.background = colors[Math.floor(Math.random() * colors.length)];
                 document.body.appendChild(el);
-                const dx = (Math.random() - 0.5) * 260;
-                const dy = (Math.random() - 0.8) * 260;
-                const rot = Math.random() * 720;
-                const duration = 900 + Math.random() * 700;
+                const dx = (Math.random() - 0.5) * 220;
+                const dy = (Math.random() - 0.8) * 220;
+                const rot = Math.random() * 420;
+                const duration = 700 + Math.random() * 450;
                 el.animate([
                     { transform: 'translate(0,0) rotate(0deg)', opacity: 1 },
                     { transform: `translate(${dx}px, ${dy}px) rotate(${rot}deg)`, opacity: 0 }
                 ], { duration, easing: 'cubic-bezier(.2,.8,.2,1)', fill: 'forwards' });
-                setTimeout(() => el.remove(), duration + 50);
+                setTimeout(() => el.remove(), duration + 40);
             }
         }
 
@@ -1268,14 +1299,16 @@ Catatan: ${notes}`;
         }
         setTimeout(() => countUp(128), 700);
 
-        document.addEventListener('mousemove', (e) => {
-            const moveX = (e.clientX / window.innerWidth - 0.5) * 12;
-            const moveY = (e.clientY / window.innerHeight - 0.5) * 12;
-            document.querySelectorAll('[data-depth]').forEach(el => {
-                const depth = Number(el.getAttribute('data-depth')) || 10;
-                el.style.transform = `translate(${moveX * depth / 60}px, ${moveY * depth / 60}px)`;
-            });
-        });
+        if (!isLowPowerMobile) {
+            document.addEventListener('mousemove', (e) => {
+                const moveX = (e.clientX / window.innerWidth - 0.5) * 12;
+                const moveY = (e.clientY / window.innerHeight - 0.5) * 12;
+                document.querySelectorAll('[data-depth]').forEach(el => {
+                    const depth = Number(el.getAttribute('data-depth')) || 10;
+                    el.style.transform = `translate(${moveX * depth / 60}px, ${moveY * depth / 60}px)`;
+                });
+            }, { passive: true });
+        }
 
         const testimonialTrack = document.getElementById('testimonialTrack');
         const testimonialSlider = document.getElementById('testimonialSlider');
@@ -1292,6 +1325,7 @@ Catatan: ${notes}`;
                 b.addEventListener('click', () => {
                     slideIndex = i;
                     updateSlides();
+                    renderDots();
                     restartAuto();
                 });
                 testimonialDots.appendChild(b);
@@ -1312,7 +1346,7 @@ Catatan: ${notes}`;
 
         function restartAuto() {
             clearInterval(autoTimer);
-            autoTimer = setInterval(nextSlide, 3500);
+            if (!isLowPowerMobile) autoTimer = setInterval(nextSlide, 4200);
         }
 
         renderDots();
