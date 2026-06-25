@@ -1,0 +1,619 @@
+<!doctype html>
+<html lang="id">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Dimsum Mentai Coquette</title>
+    <meta name="description" content="Dimsum Mentai Coquette — Dimsum mentai premium, isi 4, Rp 25.000" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --pink: #ff7fbf;
+            --pink-dark: #ff4b9e;
+            --white: #ffffff;
+            --muted: #f9f1f6;
+            --text: #333;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Poppins', sans-serif;
+            color: var(--text);
+            background: linear-gradient(180deg, var(--white) 0%, var(--muted) 100%);
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            line-height: 1.45;
+            overflow-x: hidden;
+        }
+
+        img {
+            max-width: 100%;
+            display: block;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .hero {
+            display: grid;
+            grid-template-columns: 1.1fr 0.9fr;
+            gap: 28px;
+            align-items: center;
+            background: linear-gradient(180deg, rgba(255, 127, 191, 0.07), rgba(255, 127, 191, 0.03));
+            border-radius: 24px;
+            padding: 28px;
+            box-shadow: 0 8px 30px rgba(255, 127, 191, 0.08);
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            margin-bottom: 8px;
+        }
+
+        .logo {
+            width: 64px;
+            height: 64px;
+            border-radius: 16px;
+            background: linear-gradient(135deg, var(--pink) 0%, var(--pink-dark) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 700;
+            font-size: 20px;
+            box-shadow: 0 6px 18px rgba(255, 75, 158, 0.18);
+            flex-shrink: 0;
+        }
+
+        .brand h1 {
+            margin: 0;
+            font-size: 20px;
+        }
+
+        .brand p {
+            margin: 0;
+            font-size: 13px;
+            color: #7a7a7a;
+        }
+
+        .hero .copy h2 {
+            margin: 8px 0 12px 0;
+            font-size: clamp(24px, 4vw, 36px);
+            letter-spacing: -0.3px;
+            line-height: 1.15;
+        }
+
+        .hero .copy p {
+            margin: 0 0 18px 0;
+            color: #6b6b6b;
+        }
+
+        .price {
+            display: inline-block;
+            background: linear-gradient(90deg, var(--pink) 0%, var(--pink-dark) 100%);
+            color: white;
+            padding: 10px 16px;
+            border-radius: 12px;
+            font-weight: 700;
+            box-shadow: 0 6px 18px rgba(255, 75, 158, 0.12);
+        }
+
+        .cta-row {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            border: 0;
+            padding: 12px 18px;
+            border-radius: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform .14s ease, box-shadow .14s ease, opacity .14s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 46px;
+        }
+
+        .btn:hover {
+            transform: translateY(-1px);
+            opacity: 0.96;
+        }
+
+        .btn:active {
+            transform: translateY(1px);
+        }
+
+        .btn-primary {
+            background: var(--pink-dark);
+            color: white;
+            box-shadow: 0 10px 28px rgba(255, 75, 158, 0.12);
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 2px solid rgba(255, 127, 191, 0.22);
+            color: var(--pink-dark);
+        }
+
+        .gallery {
+            background: white;
+            padding: 16px;
+            border-radius: 18px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.04);
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+        }
+
+        .gallery-grid img {
+            width: 100%;
+            aspect-ratio: 1 / 1;
+            object-fit: cover;
+            border-radius: 14px;
+            cursor: pointer;
+            border: 4px solid #fff;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
+            transition: transform .2s ease;
+        }
+
+        .gallery-grid img:hover {
+            transform: scale(1.02);
+        }
+
+        .details {
+            display: grid;
+            grid-template-columns: 1fr 360px;
+            gap: 24px;
+            margin-top: 26px;
+            align-items: start;
+        }
+
+        .card {
+            background: white;
+            padding: 18px;
+            border-radius: 18px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.04);
+        }
+
+        .card h3 {
+            margin: 0 0 10px 0;
+        }
+
+        .list {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            color: #575757;
+        }
+
+        .list li {
+            padding: 6px 0;
+            border-bottom: 1px dashed #f1ecef;
+        }
+
+        .order-box {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            align-items: stretch;
+        }
+
+        .qty {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .qty button {
+            width: 42px;
+            height: 42px;
+            border-radius: 10px;
+            border: 0;
+            background: var(--muted);
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        .qty input {
+            width: 90px;
+            padding: 10px;
+            border-radius: 10px;
+            border: 1px solid #eee;
+            text-align: center;
+            font-weight: 600;
+        }
+
+        footer {
+            text-align: center;
+            color: #8b8b8b;
+            margin: 28px 0 10px 0;
+            font-size: 14px;
+        }
+
+        .modal-backdrop {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.45);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            z-index: 40;
+        }
+
+        .modal {
+            position: relative;
+            background: white;
+            border-radius: 18px;
+            padding: 20px;
+            max-width: 520px;
+            width: 100%;
+            box-shadow: 0 16px 60px rgba(0, 0, 0, 0.28);
+        }
+
+        .modal h4 {
+            margin: 0 0 12px 0;
+        }
+
+        .field {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            margin-bottom: 10px;
+        }
+
+        .field input,
+        .field textarea {
+            padding: 11px 12px;
+            border-radius: 10px;
+            border: 1px solid #eee;
+            font-size: 14px;
+            outline: none;
+        }
+
+        .field input:focus,
+        .field textarea:focus {
+            border-color: var(--pink);
+        }
+
+        .close-x {
+            position: absolute;
+            right: 14px;
+            top: 10px;
+            background: transparent;
+            border: 0;
+            font-size: 26px;
+            line-height: 1;
+            color: #777;
+            cursor: pointer;
+        }
+
+        .lightbox {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.8);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            z-index: 50;
+        }
+
+        .lightbox img {
+            max-width: 92%;
+            max-height: 86%;
+            border-radius: 12px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
+        }
+
+        @media (max-width: 980px) {
+            .hero {
+                grid-template-columns: 1fr;
+                padding: 20px;
+            }
+
+            .details {
+                grid-template-columns: 1fr;
+            }
+
+            .gallery-grid img {
+                aspect-ratio: 4 / 3;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .container {
+                padding: 14px;
+            }
+
+            .hero {
+                border-radius: 18px;
+                padding: 16px;
+            }
+
+            .brand {
+                align-items: flex-start;
+            }
+
+            .logo {
+                width: 56px;
+                height: 56px;
+                font-size: 18px;
+            }
+
+            .hero .copy h2 {
+                font-size: 22px;
+            }
+
+            .cta-row {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .btn {
+                width: 100%;
+            }
+
+            .gallery-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .gallery-grid img {
+                aspect-ratio: 1 / 1;
+            }
+
+            .qty input {
+                width: 100%;
+                flex: 1;
+            }
+
+            .qty {
+                display: grid;
+                grid-template-columns: 42px 1fr 42px;
+            }
+        }
+
+        @media (max-width: 420px) {
+            .gallery-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <section class="hero" aria-label="Hero - Dimsum Mentai Coquette">
+            <div class="copy">
+                <div class="brand">
+                    <div class="logo">DM</div>
+                    <div>
+                        <h1>Dimsum Mentai Coquette</h1>
+                        <p>Dimsum mentai spesial — chic, creamy, girlish.</p>
+                    </div>
+                </div>
+
+                <h2>Dimsum Mentai Coquette — Isi 4</h2>
+                <p>Dimsum mentai isi 4, saus creamy mentai khas, cocok untuk camilan atau kado manis.</p>
+
+                <div style="margin:10px 0" class="price">Rp 25.000 / isi 4</div>
+
+                <div style="margin-top:18px" class="cta-row">
+                    <button class="btn btn-primary" id="buyBtn">Pesan Sekarang</button>
+                    <a class="btn btn-outline" href="#galeri">Lihat Foto</a>
+                </div>
+
+                <div style="margin-top:16px;color:#9b9b9b;font-size:13px">
+                    Pengiriman: Grab / Gojek / COD (jika tersedia). Pembayaran via transfer atau e-wallet.
+                </div>
+            </div>
+
+            <aside>
+                <div class="gallery">
+                    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px">
+                        <strong>Galeri Dimsum</strong>
+                        <span style="font-size:13px;color:#9b9b9b">4 foto</span>
+                    </div>
+                    <div id="galeri" class="gallery-grid">
+                        <img src="images/Dimsum Mentai 1.jpg" alt="Dimsum Mentai 1" data-index="0">
+                        <img src="images/Dimsum Mentai 2.jpg" alt="Dimsum Mentai 2" data-index="1">
+                        <img src="images/Dimsum Mentai 3.jpg" alt="Dimsum Mentai 3" data-index="2">
+                        <img src="images/Dimsum Mentai 4.jpg" alt="Dimsum Mentai 4" data-index="3">
+                    </div>
+                </div>
+            </aside>
+        </section>
+
+        <section class="details" aria-label="Detail produk">
+            <div class="card">
+                <h3>Deskripsi</h3>
+                <p>Dimsum Mentai Coquette adalah dimsum premium dengan saus mentai creamy khas, dibuat segar setiap
+                    hari. Setiap box berisi 4 pcs, cocok untuk dinikmati sendiri atau berbagi.</p>
+
+                <h3 style="margin-top:16px">Spesifikasi</h3>
+                <ul class="list">
+                    <li>Isi: 4 pcs per box</li>
+                    <li>Harga: Rp 25.000 / box</li>
+                    <li>Bahan: daging pilihan, saus mentai kreasi rumah</li>
+                    <li>Penyajian: siap santap atau hangatkan sebentar</li>
+                </ul>
+
+                <h3 style="margin-top:16px">Catatan</h3>
+                <p style="color:#6b6b6b">Simpan di suhu ruang maksimal 4 jam, atau simpan di kulkas untuk kesegaran
+                    lebih lama.</p>
+            </div>
+
+            <div class="card">
+                <h3>Pesan Sekarang</h3>
+                <div class="order-box">
+                    <div><strong>Rp 25.000</strong> / box (isi 4)</div>
+
+                    <div class="qty" aria-label="Quantity selector">
+                        <button id="decQty">-</button>
+                        <input id="qty" type="number" value="1" min="1" aria-label="Jumlah pesanan">
+                        <button id="incQty">+</button>
+                    </div>
+
+                    <div style="display:flex;gap:10px;flex-wrap:wrap">
+                        <button class="btn btn-primary" id="openOrder">Isi Data & Pesan</button>
+                        <button class="btn btn-outline" id="waOrder">Pesan via WhatsApp</button>
+                    </div>
+
+                    <small style="color:#8b8b8b">Harga belum termasuk ongkir. Estimasi siap dalam 30-90 menit tergantung
+                        lokasi.</small>
+                </div>
+            </div>
+        </section>
+
+        <footer>
+            &copy; <span id="year"></span> Dimsum Mentai Coquette — All rights reserved. Design By BRITS
+        </footer>
+    </div>
+
+    <div class="modal-backdrop" id="modalBackdrop" role="dialog" aria-modal="true" aria-hidden="true">
+        <div class="modal" role="document">
+            <button class="close-x" id="closeModal" aria-label="Tutup">&times;</button>
+            <h4>Form Pesanan</h4>
+            <div class="field">
+                <label>Nama</label>
+                <input id="name" type="text" placeholder="Nama lengkap">
+            </div>
+            <div class="field">
+                <label>Nomor WhatsApp</label>
+                <input id="phone" type="text" placeholder="08xxxxxxxxxx">
+            </div>
+            <div class="field">
+                <label>Alamat</label>
+                <input id="address" type="text" placeholder="Alamat lengkap untuk pengantaran">
+            </div>
+            <div class="field">
+                <label>Catatan</label>
+                <textarea id="notes" rows="3" placeholder="Contoh: tanpa bawang, antar jam ..."></textarea>
+            </div>
+            <div style="display:flex;gap:10px;justify-content:flex-end;flex-wrap:wrap">
+                <button class="btn btn-outline" id="cancelOrder">Batal</button>
+                <button class="btn btn-primary" id="submitOrder">Kirim Pesanan</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="lightbox" id="lightbox" aria-hidden="true">
+        <img src="" alt="Foto produk besar">
+    </div>
+
+    <script>
+        document.getElementById('year').textContent = new Date().getFullYear();
+
+        const qtyInput = document.getElementById('qty');
+        document.getElementById('incQty').addEventListener('click', () => qtyInput.value = Number(qtyInput.value) + 1);
+        document.getElementById('decQty').addEventListener('click', () => {
+            if (qtyInput.value > 1) qtyInput.value = Number(qtyInput.value) - 1;
+        });
+
+        const modal = document.getElementById('modalBackdrop');
+        const openOrder = document.getElementById('openOrder');
+        const buyBtn = document.getElementById('buyBtn');
+        const closeModal = document.getElementById('closeModal');
+        const cancelOrder = document.getElementById('cancelOrder');
+
+        function openModal() {
+            modal.style.display = 'flex';
+            modal.setAttribute('aria-hidden', 'false');
+        }
+
+        function closeModalFn() {
+            modal.style.display = 'none';
+            modal.setAttribute('aria-hidden', 'true');
+        }
+
+        openOrder.addEventListener('click', openModal);
+        buyBtn.addEventListener('click', openModal);
+        closeModal.addEventListener('click', closeModalFn);
+        cancelOrder.addEventListener('click', closeModalFn);
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) closeModalFn();
+        });
+
+        const tokoNumber = '62895337180263';
+
+        document.getElementById('submitOrder').addEventListener('click', () => {
+            const name = document.getElementById('name').value.trim();
+            const phone = document.getElementById('phone').value.trim();
+            const address = document.getElementById('address').value.trim();
+            const notes = document.getElementById('notes').value.trim();
+            const qty = qtyInput.value;
+
+            if (!name || !phone || !address) {
+                alert('Lengkapi nama, nomor WA, dan alamat.');
+                return;
+            }
+
+            const msg = encodeURIComponent(
+                `Pesanan Dimsum Mentai Coquette\nNama: ${name}\nNo WA: ${phone}\nAlamat: ${address}\nJumlah: ${qty} box\nTotal: Rp ${(25000 * qty).toLocaleString('id-ID')}\nCatatan: ${notes}`
+            );
+
+            window.open(`https://wa.me/${tokoNumber}?text=${msg}`, '_blank');
+        });
+
+        document.getElementById('waOrder').addEventListener('click', () => {
+            const qty = qtyInput.value;
+            const msg = encodeURIComponent(`Halo, saya mau pesan ${qty} box Dimsum Mentai Coquette. Mohon info ongkir dan estimasi`);
+            window.open(`https://wa.me/${tokoNumber}?text=${msg}`, '_blank');
+        });
+
+        const galleryImgs = document.querySelectorAll('.gallery-grid img');
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImg = lightbox.querySelector('img');
+
+        galleryImgs.forEach(img => {
+            img.addEventListener('click', (e) => {
+                lightboxImg.src = e.target.src;
+                lightbox.style.display = 'flex';
+                lightbox.setAttribute('aria-hidden', 'false');
+            });
+        });
+
+        lightbox.addEventListener('click', (e) => {
+            if (e.target === lightbox || e.target === lightboxImg) {
+                lightbox.style.display = 'none';
+                lightbox.setAttribute('aria-hidden', 'true');
+            }
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                if (modal.style.display === 'flex') closeModalFn();
+                if (lightbox.style.display === 'flex') {
+                    lightbox.style.display = 'none';
+                    lightbox.setAttribute('aria-hidden', 'true');
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>
