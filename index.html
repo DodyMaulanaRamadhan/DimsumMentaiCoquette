@@ -1147,17 +1147,19 @@
         typeLoop();
 
         function updateCountdown() {
-            const target = new Date();
-            target.setHours(23, 59, 59, 999);
+            const target = new Date(2026, 5, 29, 20, 0, 0, 0);
             const now = new Date();
             const diff = Math.max(0, target - now);
+
             const h = Math.floor(diff / 3600000);
             const m = Math.floor((diff % 3600000) / 60000);
             const s = Math.floor((diff % 60000) / 1000);
+
             document.getElementById('cdHours').textContent = String(h).padStart(2, '0');
             document.getElementById('cdMinutes').textContent = String(m).padStart(2, '0');
             document.getElementById('cdSeconds').textContent = String(s).padStart(2, '0');
         }
+
         updateCountdown();
         setInterval(updateCountdown, 1000);
 
